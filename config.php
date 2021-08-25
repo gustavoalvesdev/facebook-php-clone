@@ -2,7 +2,7 @@
 
 session_start();
 
-$base  = 'http://localhost/devsbookoo';
+$base  = 'http://localhost/facebook-php-clone';
 
 $db_name = 'devsbookoo';
 $db_host = 'localhost';

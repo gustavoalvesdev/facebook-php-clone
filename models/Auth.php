@@ -31,4 +31,8 @@ class Auth {
 		exit;
 	}
 
+	public function validateLogin($email, $password) {
+		
+	}
+
 }
