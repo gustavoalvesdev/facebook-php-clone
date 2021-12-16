@@ -36,7 +36,7 @@ class Auth {
 		$userDao = new UserDaoMySql($this->pdo);
 
 		$user = $userDao->findByEmail($email);
-
+			
 		if ($user) {
 
 			if (password_verify($password, $user->password)) {
@@ -61,5 +61,25 @@ class Auth {
 
 		return $userDao->findByEmail($email) ? true : false;
 	}	
+
+	public function registerUser($name, $email, $password, $birthdate) {
+
+		$userDao = new UserDaoMySql($this->pdo);
+
+		$hash = password_hash($password, PASSWORD_DEFAULT);
+		$token = md5(time() . rand(0, 9999));
+
+		$newUser = new User();
+		$newUser->name = $name;
+		$newUser->email = $email;
+		$newUser->password = $hash;
+		$newUser->birthdate = $birthdate;
+		$newUser->token = $token;
+
+		$userDao->insert($newUser);
+
+		$_SESSION['token'] = $token;
+
+	}
 
 }

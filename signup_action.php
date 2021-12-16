@@ -33,10 +33,14 @@ if ($name && $email && $password && $birthdate) {
 
 	if ($auth->emailExists($email) === false) {
 
+		$auth->registerUser($name, $email, $password, $birthdate);
+		header('Location: ' . $base . '/signup.php');
+		exit;
+
 	} else {
 		$_SESSION['flash'] = 'E-mail já cadastrado.';
 
-		header('Location: ' . $base . '/signup.php');
+		header('Location: ' . $base);
 		exit;
 	}
 
